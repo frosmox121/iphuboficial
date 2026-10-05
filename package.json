@@ -1,0 +1,68 @@
+{
+  "name": "iphub",
+  "version": "1.0.0",
+  "description": "IPHub - Plataforma real de diagnóstico y monitoreo de red (backend Node/Express + base de datos en disco)",
+  "main": "agent/desktop.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "node --watch start.js",
+    "postinstall": "prisma generate",
+    "desktop": "electron .",
+    "build:exe": "node build-exe.js",
+    "build:exe:win": "node build-exe.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.14",
+    "lowdb": "^1.0.0",
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.iphub.app",
+    "productName": "IPHub",
+    "files": [
+      "agent/desktop.js",
+      "server.js",
+      "start.js",
+      "public/**",
+      "prisma/**",
+      "node_modules/**",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/.prisma/**",
+      "node_modules/@prisma/**",
+      "prisma/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "IPHub.exe"
+    }
+  },
+  "author": "IPHub"
+}
